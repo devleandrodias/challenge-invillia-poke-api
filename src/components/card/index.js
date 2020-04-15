@@ -10,7 +10,9 @@ export default class Card extends Component {
     return (
       <Fragment>
         {results.map((x) => (
-          <div className="card">{x.name}</div>
+          <div key={x.name} className="card">
+            {x.name}
+          </div>
         ))}
       </Fragment>
     );

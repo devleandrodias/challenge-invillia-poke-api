@@ -44,6 +44,7 @@ Pontualidade na entrega
 ## Como executar o projeto
 
 > yarn para instalar as depedências
+
 > yarn start (Que esteja disponível porta 3000 em sua rede local), para executar o projeto
 
 > A fim de facilitar visibilidade o projeto foi hospedade no link a seguir,

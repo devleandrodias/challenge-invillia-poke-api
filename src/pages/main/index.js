@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Component } from "react";
 
 import api from "../../service/api";
@@ -10,32 +10,13 @@ import "./style.css";
 
 export default class Main extends Component {
   state = {
-    data: [
-      {
-        name: "Poke 01",
-        forms: {
-          front_default:
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png",
-          back_default:
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/22.png",
-        },
-        abilities: [
-          {
-            name: "sniper",
-            short_effect:
-              "Strengthens critical hits to inflict 3× damage rather than 2×.",
-          },
-          {
-            name: "keen-eye",
-            short_effect: "Prevents accuracy from being lowered.",
-          },
-        ],
-      },
-    ],
+    results: [],
   };
 
   async componentDidMount() {
     const { count, results } = await (await api.get()).data;
+
+    const payload = [];
 
     results.map((item) => {
       const result = {
@@ -74,89 +55,22 @@ export default class Main extends Component {
           });
         });
       });
+      payload.push(result);
     });
 
-    // results.forEach(async (element) => {
-    //   const { data } = await api.get(element.url);
-    //   const { abilities, forms } = data;
-
-    //   forms.forEach(async (element) => {
-    //     const { sprites } = (await api.get(element.url)).data;
-    //     const { front_default, back_default } = sprites;
-    //   });
-
-    //   abilities.forEach(async (element) => {
-    //     const { name, url } = element.ability;
-    //     const { effect_entries } = (await api.get(url)).data;
-
-    //     effect_entries.forEach((effect) => {
-    //       const { short_effect } = effect;
-    //     });
-    //   });
-    // }
+    this.setState({
+      count,
+      results: payload,
+    });
   }
 
   render() {
     const { count, results } = this.state;
-    console.log(results);
-    const data = [
-      {
-        name: "charmander",
-        forms: {
-          front_default:
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/24.png",
-          back_default:
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/24.png",
-        },
-        abilities: [
-          {
-            name: "chlorophyll",
-            short_effect: "Doubles Speed during strong sunlight.",
-          },
-          {
-            name: "overgrow",
-            short_effect:
-              "Strengthens grass moves to inflict 1.5× damage at 1/3 max HP or less.",
-          },
-        ],
-      },
-      {
-        name: "charizard",
-        forms: {
-          front_default:
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
-          back_default:
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/25.png",
-        },
-        abilities: [
-          {
-            name: "chlorophyll",
-            short_effect: "Doubles Speed during strong sunlight.",
-          },
-          {
-            name: "overgrow",
-            short_effect:
-              "Strengthens grass moves to inflict 1.5× damage at 1/3 max HP or less.",
-          },
-          {
-            name: "chlorophyll",
-            short_effect: "Doubles Speed during strong sunlight.",
-          },
-        ],
-      },
-    ];
-
     return (
-      <Fragment>
-        <div className="main">
-          <CardComponent results={data} />
-          <CardComponent results={data} />
-          <CardComponent results={data} />
-          <CardComponent results={data} />
-          <CardComponent results={data} />
-          <PaginationComponent count={count} />
-        </div>
-      </Fragment>
+      <div className="main">
+        <CardComponent results={results} />
+        <PaginationComponent count={count} />
+      </div>
     );
   }
 }

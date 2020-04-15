@@ -141,10 +141,51 @@ export default class Main extends Component {
           },
         ],
       },
+      {
+        name: "Poke 03",
+        forms: {
+          front_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png",
+          back_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/22.png",
+        },
+        abilities: [
+          {
+            name: "sniper",
+            short_effect:
+              "Strengthens critical hits to inflict 3× damage rather than 2×.",
+          },
+          {
+            name: "keen-eye",
+            short_effect: "Prevents accuracy from being lowered.",
+          },
+        ],
+      },
+      {
+        name: "Poke 03",
+        forms: {
+          front_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png",
+          back_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/22.png",
+        },
+        abilities: [
+          {
+            name: "sniper",
+            short_effect:
+              "Strengthens critical hits to inflict 3× damage rather than 2×.",
+          },
+          {
+            name: "keen-eye",
+            short_effect: "Prevents accuracy from being lowered.",
+          },
+        ],
+      },
     ];
 
     return (
       <Fragment>
+        <CardComponent results={data} />
         <CardComponent results={data} />
         <PaginationComponent count={count} />
       </Fragment>

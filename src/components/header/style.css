@@ -1,18 +1,26 @@
 .header {
-  background-color: #323232;
+  display: flex;
   height: 10vh;
+  background-color: #323232;
+  margin-bottom: 50px;
   align-items: center;
   justify-content: center;
   align-content: center;
 }
 
 .header img {
-  width: 25%;
-  height: 25%;
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 /*for-phone-only*/
 @media (max-width: 599px) {
+  .header {
+    margin-bottom: 40px;
+  }
+
   .header {
     height: 7vh;
   }

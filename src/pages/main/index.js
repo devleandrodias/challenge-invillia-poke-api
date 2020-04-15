@@ -1,27 +1,42 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Component } from "react";
 
 import api from "../../service/api";
 
 import CardComponent from "../../components/card";
+import PaginationComponent from "../../components/pagination";
 
 import "./style.css";
 
 export default class Main extends Component {
   state = {
-    name: null,
-    id: null,
+    count: null,
+    results: [
+      {
+        forms: [],
+        abilities: [],
+      },
+    ],
   };
+
+  async getDetailsPokemons() {}
 
   async componentDidMount() {
     const response = await api.get();
 
-    const { name } = response.data;
+    const { count, results } = response.data;
 
-    this.setState({ name });
+    this.setState({ count, results });
   }
 
   render() {
-    return <CardComponent name={this.state.name} />;
+    const { count, results } = this.state;
+
+    return (
+      <Fragment>
+        <CardComponent count={count} results={results} />
+        {/* <PaginationComponent /> */}
+      </Fragment>
+    );
   }
 }

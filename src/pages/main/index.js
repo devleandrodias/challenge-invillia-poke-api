@@ -32,6 +32,8 @@ export default class Main extends Component {
     results.map((item) => {
       const { name, url } = item;
 
+      const test = {};
+
       results.map(async () => {
         const { data } = await api.get(url);
         const { abilities, forms } = data;
@@ -39,27 +41,26 @@ export default class Main extends Component {
         forms.map(async (form) => {
           const { sprites } = (await api.get(form.url)).data;
           const { front_default } = sprites;
+          console.log(front_default);
+          // abilities.map(async (abily) => {
+          //   const { name, url } = abily.ability;
+          //   const { effect_entries } = (await api.get(url)).data;
 
-          abilities.map(async (abily) => {
-            const { name, url } = abily.ability;
-            const { effect_entries } = (await api.get(url)).data;
+          //   effect_entries.map((effect) => {
+          //     const { short_effect } = effect;
 
-            effect_entries.map((effect) => {
-              const { short_effect } = effect;
-
-              // result.abilities.push({
-              //   name,
-              //   short_effect,
-              // });
-            });
-          });
+          //     // result.abilities.push({
+          //     //   name,
+          //     //   short_effect,
+          //     // });
+          //   });
+          // });
         });
       });
 
       payload.push({
         name,
-        forms:
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+        forms: null,
         abilities: [
           {
             name: "habilidae",
@@ -90,12 +91,15 @@ export default class Main extends Component {
 
   render() {
     const { results, next, previous } = this.state;
-
+    console.log("previous", previous);
     return (
       <div className="main">
         <CardComponent results={results} />
         <div className="pagination">
-          <button onClick={() => this.prevPage(previous)}>
+          <button
+            onClick={() => this.prevPage(previous)}
+            disabled={previous === null ? true : false}
+          >
             <img src={prevIcon} alt="prevPage" className="icon-arrow" />
           </button>
           <button onClick={() => this.nextPage(next)}>

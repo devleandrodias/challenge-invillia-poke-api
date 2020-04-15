@@ -20,7 +20,7 @@ export default class Card extends Component {
               </div>
               <div className="card-description-main">
                 {res.abilities.map((ability) => (
-                  <div className="card-description-items">
+                  <div key={ability.name} className="card-description-items">
                     <div className="text-subtitle">
                       Ability:
                       <span className="text-description"> {ability.name}</span>

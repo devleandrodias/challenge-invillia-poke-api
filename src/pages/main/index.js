@@ -4,30 +4,33 @@ import { Component } from "react";
 import api from "../../service/api";
 
 import CardComponent from "../../components/card";
-import PaginationComponent from "../../components/pagination";
 
 import "./style.css";
+
+import prevIcon from "../../assets/icons/prev.svg";
+import nextIcon from "../../assets/icons/next.svg";
 
 export default class Main extends Component {
   state = {
     results: [],
+    page: null,
+    next: null,
+    previous: null,
   };
 
   async componentDidMount() {
-    const { count, results } = await (await api.get()).data;
+    this.loadPokemons();
+  }
+
+  loadPokemons = async (
+    page = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=10"
+  ) => {
+    const { count, results, next, previous } = await (await api.get(page)).data;
 
     const payload = [];
 
     results.map((item) => {
-      const result = {
-        name: null,
-        forms: {},
-        abilities: [],
-      };
-
       const { name, url } = item;
-
-      result.name = name;
 
       results.map(async () => {
         const { data } = await api.get(url);
@@ -35,10 +38,7 @@ export default class Main extends Component {
 
         forms.map(async (form) => {
           const { sprites } = (await api.get(form.url)).data;
-          const { front_default, back_default } = sprites;
-
-          result.forms.front_default = front_default;
-          result.forms.back_default = back_default;
+          const { front_default } = sprites;
 
           abilities.map(async (abily) => {
             const { name, url } = abily.ability;
@@ -47,29 +47,63 @@ export default class Main extends Component {
             effect_entries.map((effect) => {
               const { short_effect } = effect;
 
-              result.abilities.push({
-                name,
-                short_effect,
-              });
+              // result.abilities.push({
+              //   name,
+              //   short_effect,
+              // });
             });
           });
         });
       });
-      payload.push(result);
+
+      payload.push({
+        name,
+        forms:
+          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+        abilities: [
+          {
+            name: "habilidae",
+            short_effect: "desce habili",
+          },
+          {
+            name: "habilidae2",
+            short_effect: "desce habili2",
+          },
+        ],
+      });
     });
 
     this.setState({
       count,
       results: payload,
+      next,
+      previous,
     });
-  }
+  };
+
+  prevPage = (prev) => {
+    this.loadPokemons(prev);
+  };
+
+  nextPage = (next) => {
+    this.loadPokemons(next);
+  };
 
   render() {
-    const { count, results } = this.state;
+    const { count, results, next, previous } = this.state;
+
     return (
       <div className="main">
         <CardComponent results={results} />
-        <PaginationComponent count={count} />
+        <div className="pagination">
+          <button onClick={() => this.prevPage(previous)}>
+            <img src={prevIcon} alt="prevPage" />
+          </button>
+          <button onClick={() => this.nextPage(next)}>
+            <img src={nextIcon} alt="nextPage" />
+          </button>
+          total result {count}
+        </div>
       </div>
     );
   }

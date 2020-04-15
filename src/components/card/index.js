@@ -6,7 +6,7 @@ import "./style.css";
 export default class Card extends Component {
   render() {
     const { results } = this.props;
-    // console.log(results);
+
     return (
       <div className="card-row">
         {results.map((res) => (
@@ -16,10 +16,8 @@ export default class Card extends Component {
                 <span>{res.name}</span>
               </div>
               <div className="image-pokemon">
-                {/* <img src={res.forms.front_default} /> */}
-                <p>{res.forms.front_default}</p>
+                <img src={res.forms} />
               </div>
-
               <div className="card-description-main">
                 {res.abilities.map((ability) => (
                   <div className="card-description-items">

@@ -1,26 +1,35 @@
-.card {
-  display: flex;
-  flex: 1;
-  height: 25vh;
-  margin-bottom: 25px;
-  border-radius: 5px;
-  margin: 20px;
-  background-color: #e8e3e3;
+.header {
+  background-color: #323232;
+  height: 10vh;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+.header img {
+  width: 25%;
+  height: 25%;
 }
 
 /*for-phone-only*/
 @media (max-width: 599px) {
-  @content;
+  .header {
+    height: 7vh;
+  }
 }
 
 /* for-tablet-portrait-up */
 @media (min-width: 600px) {
-  @content;
+  .header {
+    height: 8vh;
+  }
 }
 
 /* for-tablet-landscape-up */
 @media (min-width: 900px) {
-  @content;
+  .header {
+    height: 9vh;
+  }
 }
 
 /* for-desktop-up */

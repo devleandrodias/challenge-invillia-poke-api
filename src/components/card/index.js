@@ -9,11 +9,13 @@ export default class Card extends Component {
 
     return (
       <Fragment>
-        {results.map((x) => (
-          <div key={x.name} className="card">
-            {x.name}
-          </div>
-        ))}
+        <div className="card-row">
+          {results.map((x) => (
+            <div key={x.name} className="card">
+              {x.name}
+            </div>
+          ))}
+        </div>
       </Fragment>
     );
   }

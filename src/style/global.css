@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;500&display=swap");
+
 html,
 body,
 div,
@@ -104,6 +106,7 @@ section {
 body {
   line-height: 1;
   background-color: #d61d4e;
+  font-family: "Raleway", sans-serif;
 }
 
 ol,

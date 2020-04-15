@@ -3,6 +3,8 @@ import { Component } from "react";
 
 export default class Pagination extends Component {
   render() {
-    return <h1>[1] [2] [3] [4]</h1>;
+    const { count } = this.props;
+
+    return <h1>[1] [2] [3] [4] total de {count} de pokemons</h1>;
   }
 }

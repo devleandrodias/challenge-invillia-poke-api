@@ -13,29 +13,140 @@ export default class Main extends Component {
     count: null,
     results: [
       {
-        forms: [],
-        abilities: [],
+        name: null,
+        forms: {
+          front_default: null,
+          back_default: null,
+        },
+        abilities: [
+          {
+            name: null,
+            short_effect: null,
+          },
+        ],
       },
     ],
   };
 
-  async getDetailsPokemons() {}
-
   async componentDidMount() {
-    const response = await api.get();
+    const { count, results } = await (await api.get()).data;
 
-    const { count, results } = response.data;
+    results.forEach(async (element) => {
+      const { data } = await api.get(element.url);
+      const { abilities, forms } = data;
 
-    this.setState({ count, results });
+      forms.forEach(async (element) => {
+        const { sprites } = (await api.get(element.url)).data;
+        const { front_default, back_default } = sprites;
+      });
+
+      abilities.forEach(async (element) => {
+        const { name, url } = element.ability;
+        const { effect_entries } = (await api.get(url)).data;
+
+        effect_entries.forEach((effect) => {
+          const { short_effect } = effect;
+        });
+      });
+
+      this.setState({
+        count,
+        results: [
+          {
+            name: element.name,
+            forms: {
+              front_default:
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png",
+              back_default:
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/22.png",
+            },
+            abilities: [
+              {
+                name: "sniper",
+                short_effect:
+                  "Strengthens critical hits to inflict 3× damage rather than 2×.",
+              },
+              {
+                name: "keen-eye",
+                short_effect: "Prevents accuracy from being lowered.",
+              },
+            ],
+          },
+        ],
+      });
+    });
   }
 
   render() {
     const { count, results } = this.state;
 
+    const data = [
+      {
+        name: "Poke 01",
+        forms: {
+          front_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png",
+          back_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/22.png",
+        },
+        abilities: [
+          {
+            name: "sniper",
+            short_effect:
+              "Strengthens critical hits to inflict 3× damage rather than 2×.",
+          },
+          {
+            name: "keen-eye",
+            short_effect: "Prevents accuracy from being lowered.",
+          },
+        ],
+      },
+      {
+        name: "Poke 02",
+        forms: {
+          front_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png",
+          back_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/22.png",
+        },
+        abilities: [
+          {
+            name: "sniper",
+            short_effect:
+              "Strengthens critical hits to inflict 3× damage rather than 2×.",
+          },
+          {
+            name: "keen-eye",
+            short_effect: "Prevents accuracy from being lowered.",
+          },
+        ],
+      },
+      {
+        name: "Poke 03",
+        forms: {
+          front_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png",
+          back_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/22.png",
+        },
+        abilities: [
+          {
+            name: "sniper",
+            short_effect:
+              "Strengthens critical hits to inflict 3× damage rather than 2×.",
+          },
+          {
+            name: "keen-eye",
+            short_effect: "Prevents accuracy from being lowered.",
+          },
+        ],
+      },
+    ];
+
     return (
       <Fragment>
-        <CardComponent count={count} results={results} />
-        {/* <PaginationComponent /> */}
+        <CardComponent results={data} />
+        <PaginationComponent count={count} />
       </Fragment>
     );
   }

@@ -1,6 +1,7 @@
 .card {
-  width: 100px;
+  display: flex;
   height: 100px;
+  margin-bottom: 25px;
   border-radius: 10px;
   background-color: #e8e3e3;
 }

@@ -29,9 +29,9 @@ Pontualidade na entrega
 
 > Recursos adicionados ao projeto mas não solicitados e/ou recomendados no desafio.
 
-- Reponsividade para web e mobile
-- UI / UX pensada no usuário final
-- Monstrar imagens de cada pokémon
+- Responsividade para web e mobile
+- UI / UX pensado no usuário final
+- Mostrar imagens de cada pokémon
 - Fluidez na navegação
 - Hospedagem da aplicação no Netlify
 - Camada de segurança na página (HTTPS / SSL)
@@ -40,14 +40,15 @@ Pontualidade na entrega
 ## Não aplicados
 
 - Teste no front-end
+- Não implementado botão de mais detalhes
 
 ## Como executar o projeto
 
-> yarn para instalar as depedências
+> yarn para instalar as dependências
 
-> yarn start (Que esteja disponível porta 3000 em sua rede local), para executar o projeto
+> yarn start (Que esteja disponível na porta 3000 em sua rede local), para executar o projeto
 
-> A fim de facilitar visibilidade o projeto foi hospedade no link a seguir,
+> A fim de facilitar visibilidade o projeto foi hospedado no link a seguir,
 > utilizando recursos próprios para distrubição em produção
 
 [Challenge Invillia Pokémon GO](https://pokemon-go-invillia.netlify.app "Challenge Invillia")

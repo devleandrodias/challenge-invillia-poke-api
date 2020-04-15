@@ -25,7 +25,7 @@ export default class Main extends Component {
   loadPokemons = async (
     page = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=10"
   ) => {
-    const { count, results, next, previous } = await (await api.get(page)).data;
+    const { results, next, previous } = await (await api.get(page)).data;
 
     const payload = [];
 
@@ -74,7 +74,6 @@ export default class Main extends Component {
     });
 
     this.setState({
-      count,
       results: payload,
       next,
       previous,
@@ -90,19 +89,18 @@ export default class Main extends Component {
   };
 
   render() {
-    const { count, results, next, previous } = this.state;
+    const { results, next, previous } = this.state;
 
     return (
       <div className="main">
         <CardComponent results={results} />
         <div className="pagination">
           <button onClick={() => this.prevPage(previous)}>
-            <img src={prevIcon} alt="prevPage" />
+            <img src={prevIcon} alt="prevPage" className="icon-arrow" />
           </button>
           <button onClick={() => this.nextPage(next)}>
-            <img src={nextIcon} alt="nextPage" />
+            <img src={nextIcon} alt="nextPage" className="icon-arrow" />
           </button>
-          total result {count}
         </div>
       </div>
     );

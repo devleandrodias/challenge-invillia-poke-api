@@ -91,7 +91,7 @@ export default class Main extends Component {
 
   render() {
     const { results, next, previous } = this.state;
-    console.log("previous", previous);
+
     return (
       <div className="main">
         <CardComponent results={results} />

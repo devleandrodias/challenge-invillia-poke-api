@@ -16,7 +16,7 @@ export default class Card extends Component {
                 <span>{res.name}</span>
               </div>
               <div className="image-pokemon">
-                <img src={res.forms} />
+                <img src={res.forms} alt={res.name} />
               </div>
               <div className="card-description-main">
                 {res.abilities.map((ability) => (

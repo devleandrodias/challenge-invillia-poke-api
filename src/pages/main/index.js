@@ -10,6 +10,8 @@ import "./style.css";
 import prevIcon from "../../assets/icons/prev.svg";
 import nextIcon from "../../assets/icons/next.svg";
 
+const baseURL = "https://pokeapi.co/api/v2/pokemon";
+
 export default class Main extends Component {
   state = {
     results: [],
@@ -22,60 +24,59 @@ export default class Main extends Component {
     this.loadPokemons();
   }
 
-  loadPokemons = async (
-    page = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=10"
-  ) => {
+  loadPokemons = async (page = `${baseURL}?offset=0&limit=10`) => {
     const { results, next, previous } = await (await api.get(page)).data;
 
-    const payload = [];
+    let arrayAux = [];
 
-    results.map((item) => {
-      const { name, url } = item;
+    for (let index = 0; index < results.length; index++) {
+      const { name, url } = results[index];
 
-      const test = {};
+      const response = await api.get(url);
 
-      results.map(async () => {
-        const { data } = await api.get(url);
-        const { abilities, forms } = data;
+      const { abilities, forms } = response.data;
 
-        forms.map(async (form) => {
-          const { sprites } = (await api.get(form.url)).data;
-          const { front_default } = sprites;
-          console.log(front_default);
-          // abilities.map(async (abily) => {
-          //   const { name, url } = abily.ability;
-          //   const { effect_entries } = (await api.get(url)).data;
+      const urlForm = forms.map((form) => {
+        const { url: urlForm } = form;
+        return urlForm;
+      });
 
-          //   effect_entries.map((effect) => {
-          //     const { short_effect } = effect;
+      const arryAuxHabi = [];
 
-          //     // result.abilities.push({
-          //     //   name,
-          //     //   short_effect,
-          //     // });
-          //   });
-          // });
+      abilities.map(async (ab) => {
+        const { ability } = ab;
+        const { name, url } = ability;
+
+        const response = await api.get(url);
+
+        const { effect_entries } = response.data;
+
+        effect_entries.map((eff) => {
+          const { effect } = eff;
+
+          arryAuxHabi.push({
+            name,
+            short_effect: effect,
+          });
+
+          return null;
         });
       });
 
-      payload.push({
-        name,
-        forms: null,
-        abilities: [
-          {
-            name: "habilidae",
-            short_effect: "desce habili",
-          },
-          {
-            name: "habilidae2",
-            short_effect: "desce habili2",
-          },
-        ],
-      });
-    });
+      const responseForm = await api.get(urlForm[0]);
+      const { sprites } = responseForm.data;
+      const { front_default } = sprites;
 
+      arrayAux.push({
+        name,
+        forms: front_default,
+        abilities: arryAuxHabi,
+      });
+    }
+
+    //Seta no estado
     this.setState({
-      results: payload,
+      results: arrayAux,
       next,
       previous,
     });

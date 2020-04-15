@@ -55,21 +55,22 @@
 }
 
 .card-description-items {
-  padding: 15px 0px;
+  padding: 10px 0px;
 }
 
 .text-subtitle {
   font-weight: bold;
   text-transform: capitalize;
-  padding: 3px;
+  padding: 1px;
 }
 
 .text-description {
   font-weight: 400;
+  line-height: 1.4;
 }
 
 .text-divisor {
-  padding-top: 10px;
+  padding-top: 5px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.3);
 }
 

@@ -52,11 +52,11 @@ export default class Main extends Component {
         const { effect_entries } = response.data;
 
         effect_entries.map((eff) => {
-          const { effect } = eff;
+          const { short_effect } = eff;
 
           arryAuxHabi.push({
             name,
-            short_effect: effect,
+            short_effect,
           });
 
           return null;

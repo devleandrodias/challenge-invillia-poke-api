@@ -12,9 +12,7 @@ export default class Footer extends Component {
       <div className="footer">
         <p>Developed with</p>
         <img src={hearth} />
-        <p>love by</p>
-        <img src={pokemon} />
-        <p>Leandro Dias</p>
+        <p>love by Leandro Dias</p>
       </div>
     );
   }

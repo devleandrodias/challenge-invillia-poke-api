@@ -1,7 +1,10 @@
 .card {
-  display: flex;
+  display: grid;
+  height: 60vh;
+  overflow: hidden;
+  grid-template-rows: 85% 15%;
+  flex-direction: column;
   flex: 1;
-  height: 25vh;
   border-radius: 5px;
   margin: 20px;
   background-color: #e8e3e3;
@@ -12,26 +15,99 @@
   box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25);
 }
 
+.card-title {
+  display: flex;
+  color: #1f2326;
+  font-weight: 700;
+  justify-content: center;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  margin-bottom: 15px;
+}
+
+.image-pokemon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-body {
+  padding: 30px 50px;
+  display: grid;
+}
+
+.card-body img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d61d4e;
+  border-radius: 100px;
+  padding: 5px;
+  -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+.card-description-main {
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.card-description-items {
+  padding: 15px 0px;
+}
+
+.text-subtitle {
+  font-weight: bold;
+  text-transform: capitalize;
+  font-size: 0.9em;
+  padding: 3px;
+}
+
+.text-description {
+  font-weight: 400;
+}
+
+.text-divisor {
+  padding-top: 10px;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.3);
+}
+
+.card-footer {
+  display: flex;
+  background-color: #1f2326;
+  color: #e8e3e3;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 5px 5px;
+  cursor: pointer;
+}
+
 /*for-phone-only*/
 @media (max-width: 599px) {
   .card {
-    height: 20vh;
-    margin: 15px;
+    height: 75vh;
+  }
+
+  .card-description-main {
+    overflow: scroll;
+    overflow-x: hidden;
   }
 }
 
 /* for-tablet-portrait-up */
 @media (min-width: 600px) {
-  @content;
 }
 
 /* for-tablet-landscape-up */
 @media (min-width: 900px) {
-  @content;
 }
 
 /* for-desktop-up */
 @media (min-width: 1200px) {
+  .card {
+    height: 70vh;
+  }
   .card-row {
     display: flex;
     flex-direction: row;
@@ -40,5 +116,7 @@
 
 /*for-big-desktop-up*/
 @media (min-width: 1800px) {
-  @content;
+  .card {
+    height: 65vh;
+  }
 }

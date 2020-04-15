@@ -131,3 +131,8 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+.root {
+  display: grid;
+  grid-template-rows: 15% 75% 10%;
+}
